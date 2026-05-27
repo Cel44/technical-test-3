@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
+
 
 // Issue 1: Inline API key (security issue)
 const API_KEY = 'sk-1234567890abcdef'
@@ -10,18 +11,18 @@ function App() {
   const [filter, setFilter] = useState('all')
   
   // Issue 3: useEffect tanpa dependency array yang tepat
-  useEffect(() => {
-    // Load from localStorage
-    const saved = localStorage.getItem('todos')
-    if (saved) {
-      setTodos(JSON.parse(saved))
-    }
-  }, [])
+   useEffect(() => {
+      // Load from localStorage
+      const saved = localStorage.getItem('todos')
+      if (saved) {
+         setTodos(JSON.parse(saved))
+      }
+   }, [setTodos])
   
   // Issue 4: useEffect yang terlalu sering run
   useEffect(() => {
     localStorage.setItem('todos', JSON.stringify(todos))
-  })
+  }, [setTodos])
   
   // Issue 5: Function yang tidak di-memoize, re-create setiap render
   const addTodo = () => {
@@ -30,9 +31,9 @@ function App() {
       return
     }
     
-    // Issue 6: Menggunakan Date.now() sebagai ID (bisa collision)
+    // (Done) Issue 6: Menggunakan Date.now() sebagai ID (bisa collision) 
     const newTodo = {
-      id: Date.now(),
+      id: crypto.randomUUID(),
       text: input,
       completed: false,
       createdAt: new Date().toISOString()
@@ -43,9 +44,17 @@ function App() {
   }
   
   // Issue 7: Tidak ada error handling
-  const deleteTodo = (id) => {
-    setTodos(todos.filter(todo => todo.id !== id))
-  }
+   const deleteTodo = (id) => {
+      if (!id) {
+         return
+      }
+
+      try {
+         setTodos(todos.filter(todo => todo.id !== id))
+      } catch (error) {
+         console.error('Error deleting todo:', error)
+      }
+   }
   
   const toggleTodo = (id) => {
     setTodos(todos.map(todo => 
@@ -54,22 +63,22 @@ function App() {
   }
   
   // Issue 8: Logic filtering yang bisa dipindah ke useMemo
-  const getFilteredTodos = () => {
-    if (filter === 'active') {
-      return todos.filter(todo => !todo.completed)
-    }
-    if (filter === 'completed') {
-      return todos.filter(todo => todo.completed)
-    }
-    return todos
-  }
+   const getFilteredTodos = useMemo(() => {
+      if (filter === 'active') {
+         return todos.filter(todo => !todo.completed)
+      }
+      if (filter === 'completed') {
+         return todos.filter(todo => todo.completed)
+      }
+      return todos
+   }, [todos, filter])
   
   // Issue 9: Calculation yang tidak perlu di setiap render
-  const stats = {
-    total: todos.length,
-    completed: todos.filter(t => t.completed).length,
-    active: todos.filter(t => !t.completed).length
-  }
+   const stats = {
+      total: todos.length,
+      completed: todos.filter(t => t.completed).length,
+      active: todos.filter(t => !t.completed).length
+   }
   
   // Issue 10: Inline event handler dengan arrow function (re-create setiap render)
   return (
@@ -116,7 +125,7 @@ function App() {
       
       <div className="todo-list">
         {/* Issue 13: Tidak ada handling untuk empty state */}
-        {getFilteredTodos().map((todo) => (
+        {getFilteredTodos.map((todo) => (
           // Issue 14: Key menggunakan index bisa lebih baik dengan ID
           <div key={todo.id} className={`todo-item ${todo.completed ? 'completed' : ''}`}>
             <input 
