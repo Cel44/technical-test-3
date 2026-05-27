@@ -36,6 +36,10 @@
 ## Changes
 ### 1. 
 
+### 5. // Issue 5: Function yang tidak di-memoize, re-create setiap render
+menambahkan useCallback untuk memo-izing function
+
+
 ### 6. UUID collision because of Date.now()
 menambahkan crypto.randomUUID() untuk menghasilkan UUID yang unik
 
@@ -43,5 +47,5 @@ menambahkan crypto.randomUUID() untuk menghasilkan UUID yang unik
 ### 7. Error Handling
 menambah try catch block untuk error handling
 
-### 8. useMemo
+### 8. useMemo (Done)
 menggunakan useMemo untuk memo-izing logic filtering

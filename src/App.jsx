@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo, useCallback } from 'react'
 
 
 // Issue 1: Inline API key (security issue)
@@ -19,29 +19,29 @@ function App() {
       }
    }, [setTodos])
   
-  // Issue 4: useEffect yang terlalu sering run
-  useEffect(() => {
-    localStorage.setItem('todos', JSON.stringify(todos))
-  }, [setTodos])
+   // Issue 4: useEffect yang terlalu sering run
+   useEffect(() => {
+      localStorage.setItem('todos', JSON.stringify(todos))
+   }, [todos])
   
-  // Issue 5: Function yang tidak di-memoize, re-create setiap render
-  const addTodo = () => {
-    if (input.trim() === '') {
-      alert('Please enter a todo')
-      return
-    }
+   // (Done) Issue 5: Function yang tidak di-memoize, re-create setiap render
+   const addTodo = useCallback(() => {
+      if (input.trim() === '') {
+         alert('Please enter a todo')
+         return
+      }
     
-    // (Done) Issue 6: Menggunakan Date.now() sebagai ID (bisa collision) 
-    const newTodo = {
-      id: crypto.randomUUID(),
-      text: input,
-      completed: false,
-      createdAt: new Date().toISOString()
-    }
-    
-    setTodos([...todos, newTodo])
-    setInput('')
-  }
+      // (Done) Issue 6: Menggunakan Date.now() sebagai ID (bisa collision) 
+      const newTodo = {
+         id: crypto.randomUUID(),
+         text: input,
+         completed: false,
+         createdAt: new Date().toISOString()
+      }
+      
+      setTodos(todos => [...todos, newTodo])
+      setInput('')
+   }, [input])
   
   // Issue 7: Tidak ada error handling
    const deleteTodo = (id) => {
@@ -62,7 +62,7 @@ function App() {
     ))
   }
   
-  // Issue 8: Logic filtering yang bisa dipindah ke useMemo
+  // Issue 8: (done) Logic filtering yang bisa dipindah ke useMemo
    const getFilteredTodos = useMemo(() => {
       if (filter === 'active') {
          return todos.filter(todo => !todo.completed)
