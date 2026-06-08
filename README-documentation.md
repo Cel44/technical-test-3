@@ -7,7 +7,7 @@
 5. **Make surgical fixes** - Change only what's necessary
 
 
-## Changes
+## questions
 ### 1. Security Issues
 - Are there any security vulnerabilities?
 - Is user input handled safely?
@@ -34,9 +34,19 @@
 
 
 ## Changes
-### 1. 
+### 1. Issue 1: Inline API key (security issue)
+Memindahkan API_KEY ke .env
 
-### 5. // Issue 5: Function yang tidak di-memoize, re-create setiap render
+### 2. Issue 2: State management bisa lebih baik
+I don't see the problem in Issue 2?
+
+### 3. Issue 3: useEffect tanpa dependency array yang tepat
+I don't see the problem in Issue 3?
+
+### 4. Issue 4: useEffect yang terlalu sering run
+Menambahkan todos dalam dependency array agar UseEffect hanya dijalankan ketika todos = [{1, 2, 3}] berubah
+
+### 5. Issue 5: Function yang tidak di-memoize, re-create setiap render
 menambahkan useCallback untuk memo-izing function
 
 

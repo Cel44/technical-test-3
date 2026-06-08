@@ -1,8 +1,6 @@
 import { useState, useEffect, useMemo, useCallback } from 'react'
 
-
-// Issue 1: Inline API key (security issue)
-const API_KEY = 'sk-1234567890abcdef'
+const API_KEY = import.meta.env.VITE_API_KEY
 
 function App() {
   // Issue 2: State management bisa lebih baik
@@ -10,16 +8,16 @@ function App() {
   const [input, setInput] = useState('')
   const [filter, setFilter] = useState('all')
   
-  // Issue 3: useEffect tanpa dependency array yang tepat
+  // Issue 3: (?) useEffect tanpa dependency array yang tepat
    useEffect(() => {
       // Load from localStorage
       const saved = localStorage.getItem('todos')
       if (saved) {
          setTodos(JSON.parse(saved))
       }
-   }, [setTodos])
+   }, [])
   
-   // Issue 4: useEffect yang terlalu sering run
+   // (Done) Issue 4: useEffect yang terlalu sering run
    useEffect(() => {
       localStorage.setItem('todos', JSON.stringify(todos))
    }, [todos])
