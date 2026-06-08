@@ -47,11 +47,7 @@ function App() {
          return
       }
 
-      try {
-         setTodos(todos.filter(todo => todo.id !== id))
-      } catch (error) {
-         console.error('Error deleting todo:', error)
-      }
+      setTodos(prev => prev.filter(todo => todo.id !== id))
    }
   
   const toggleTodo = (id) => {
