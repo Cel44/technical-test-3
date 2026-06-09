@@ -52,6 +52,16 @@ button {
   font-size: 14px;
 }
 
+.filter-button {
+   margin-bottom: 20px;
+   display: flex;
+   gap: 10px;
+}
+
+.use-filter {
+   background-color: #28a745;
+}
+
 button:hover {
   background: #0056b3;
 }

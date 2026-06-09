@@ -67,3 +67,6 @@ menggunakan useMemo untuk memo-izing stats
 
 ### 11. Tidak ada label untuk accessibility
 menambahkan aria-label='Todo input' untuk meningkatkan kesadaran
+
+### 12. Inline styles (inconsistent dengan CSS file)
+menambahkan className untuk mengatur style lewat CSS
