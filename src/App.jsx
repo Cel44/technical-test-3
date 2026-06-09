@@ -41,7 +41,7 @@ function App() {
       setInput('')
    }, [input])
   
-  // Issue 7: Tidak ada error handling
+  // (Done) Issue 7: Tidak ada error handling
    const deleteTodo = (id) => {
       if (!id) {
          return
@@ -56,7 +56,7 @@ function App() {
     ))
   }
   
-  // Issue 8: (done) Logic filtering yang bisa dipindah ke useMemo
+  // (Done) Issue 8: Logic filtering yang bisa dipindah ke useMemo
    const getFilteredTodos = useMemo(() => {
       if (filter === 'active') {
          return todos.filter(todo => !todo.completed)
@@ -67,12 +67,14 @@ function App() {
       return todos
    }, [todos, filter])
   
-  // Issue 9: Calculation yang tidak perlu di setiap render
-   const stats = {
-      total: todos.length,
-      completed: todos.filter(t => t.completed).length,
-      active: todos.filter(t => !t.completed).length
-   }
+  // (Done) Issue 9: Calculation yang tidak perlu di setiap render
+   const stats = useMemo(() => {
+      return {
+         total: todos.length,
+         completed: todos.filter(t => t.completed).length,
+         active: todos.filter(t => !t.completed).length
+      }
+   }, [todos])
   
   // Issue 10: Inline event handler dengan arrow function (re-create setiap render)
   return (

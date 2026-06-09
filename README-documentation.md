@@ -59,3 +59,6 @@ menambah try catch block untuk error handling
 
 ### 8. useMemo (Done)
 menggunakan useMemo untuk memo-izing logic filtering
+
+### 9. Calculation yang tidak perlu di setiap render
+menggunakan useMemo untuk memo-izing stats
