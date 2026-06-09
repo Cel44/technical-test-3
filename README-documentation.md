@@ -62,3 +62,8 @@ menggunakan useMemo untuk memo-izing logic filtering
 
 ### 9. Calculation yang tidak perlu di setiap render
 menggunakan useMemo untuk memo-izing stats
+
+
+
+### 11. Tidak ada label untuk accessibility
+menambahkan aria-label='Todo input' untuk meningkatkan kesadaran

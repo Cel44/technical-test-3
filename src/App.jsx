@@ -81,11 +81,12 @@ function App() {
     <div className="app">
       <h1>My Todo List</h1>
       
-      {/* Issue 11: Tidak ada label untuk accessibility */}
+      {/* (Done) Issue 11: Tidak ada label untuk accessibility */}
       <div className="input-section">
         <input 
           type="text"
           value={input}
+          aria-label='Todo input'
           onChange={(e) => setInput(e.target.value)}
           onKeyPress={(e) => {
             if (e.key === 'Enter') {
