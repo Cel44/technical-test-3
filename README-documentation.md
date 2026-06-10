@@ -80,3 +80,6 @@ Kode sudah menggunakan ID untuk key
 
 ### 15. XSS jika text dari user input
 dangerouslySetInnerHTML dihapus diganti dengan span biasa
+
+### 16. Debug code yang tertinggal
+hapus console.log
