@@ -70,3 +70,8 @@ menambahkan aria-label='Todo input' untuk meningkatkan kesadaran
 
 ### 12. Inline styles (inconsistent dengan CSS file)
 menambahkan className untuk mengatur style lewat CSS
+
+### 13. Handling empty state
+menambahkan getFilteredTodos.length === 0 condition untuk menangani empty state
+
+### 14.

@@ -122,8 +122,11 @@ function App() {
       </div>
       
       <div className="todo-list">
-        {/* Issue 13: Tidak ada handling untuk empty state */}
-        {getFilteredTodos.map((todo) => (
+        {/* (Done)Issue 13: Tidak ada handling untuk empty state */}
+        {getFilteredTodos.length === 0 ? ( 
+            <span className='todo-item'>No todo yet</span>
+        ) : (
+         getFilteredTodos.map((todo) => (
           // Issue 14: Key menggunakan index bisa lebih baik dengan ID
           <div key={todo.id} className={`todo-item ${todo.completed ? 'completed' : ''}`}>
             <input 
@@ -140,7 +143,8 @@ function App() {
               Delete
             </button>
           </div>
-        ))}
+        ))
+      )}
       </div>
       
       <div className="stats">
