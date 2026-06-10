@@ -127,15 +127,18 @@ function App() {
             <span className='todo-item'>No todo yet</span>
         ) : (
          getFilteredTodos.map((todo) => (
-          // Issue 14: Key menggunakan index bisa lebih baik dengan ID
+          // (Done) Issue 14: Key menggunakan index bisa lebih baik dengan ID
           <div key={todo.id} className={`todo-item ${todo.completed ? 'completed' : ''}`}>
             <input 
               type="checkbox"
               checked={todo.completed}
               onChange={() => toggleTodo(todo.id)}
             />
-            {/* Issue 15: Potential XSS jika text dari user input */}
-            <span dangerouslySetInnerHTML={{ __html: todo.text }} />
+            {/* (Done) Issue 15: Potential XSS jika text dari user input */}
+            <span>
+               {todo.text}
+            </span>
+
             <button 
               className="delete-btn"
               onClick={() => deleteTodo(todo.id)}
