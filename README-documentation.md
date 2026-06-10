@@ -63,7 +63,8 @@ menggunakan useMemo untuk memo-izing logic filtering
 ### 9. Calculation yang tidak perlu di setiap render
 menggunakan useMemo untuk memo-izing stats
 
-
+### 10. Inline event handler dengan arrow function (re-create setiap render)
+Tidak diubah karena tidak perlu, jika render menjadi masalah karena terlalu banyak item, maka pagination sepertinya akan lebih efektid daripada mengubah arrow function
 
 ### 11. Tidak ada label untuk accessibility
 menambahkan aria-label='Todo input' untuk meningkatkan kesadaran

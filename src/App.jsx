@@ -77,7 +77,7 @@ function App() {
       }
    }, [todos])
   
-  // Issue 10: Inline event handler dengan arrow function (re-create setiap render)
+  // (Done) Issue 10: Inline event handler dengan arrow function (re-create setiap render)
   return (
     <div className="app">
       <h1>My Todo List</h1>
