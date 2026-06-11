@@ -4,8 +4,13 @@ import { useState, useEffect, useMemo, useCallback } from 'react'
 const API_KEY = import.meta.env.VITE_API_KEY
 
 function App() {
-  // Issue 2: State management bisa lebih baik
-  const [todos, setTodos] = useState([])
+  // (Done) Issue 2: State management bisa lebih baik
+  const [todos, setTodos] = useState(() => {
+      const saved = localStorage.getItem('todos')
+
+      return saved ? JSON.parse(saved) : []
+   }, [])
+
   const [input, setInput] = useState('')
   const [filter, setFilter] = useState('all')
   

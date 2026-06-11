@@ -38,7 +38,7 @@
 Memindahkan API_KEY ke .env
 
 ### 2. Issue 2: State management bisa lebih baik
-I don't see the problem in Issue 2?
+const [todos, setTodos] ditambahkan kedalam useState
 
 ### 3. Issue 3: useEffect tanpa dependency array yang tepat
 I don't see the problem in Issue 3?
